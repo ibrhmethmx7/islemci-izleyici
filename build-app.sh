@@ -5,9 +5,14 @@ cd "$(dirname "$0")"
 
 NAME=IslemciIzleyici
 APP="build/$NAME.app"
+VERSION="${VERSION:-1.0}"
 
-swift build -c release
-BIN="$(swift build -c release --show-bin-path)/$NAME"
+# UNIVERSAL=1: Apple Silicon + Intel için tek dosya (dağıtım için). Varsayılan: yalnızca bu Mac'in mimarisi.
+ARCHS=()
+[[ "${UNIVERSAL:-}" == 1 ]] && ARCHS=(--arch arm64 --arch x86_64)
+
+swift build -c release "${ARCHS[@]}"
+BIN="$(swift build -c release "${ARCHS[@]}" --show-bin-path)/$NAME"
 
 rm -rf "$APP"
 mkdir -p "$APP/Contents/MacOS"
@@ -23,7 +28,7 @@ cat > "$APP/Contents/Info.plist" <<PLIST
     <key>CFBundleName</key><string>İşlemci İzleyici</string>
     <key>CFBundleDisplayName</key><string>İşlemci İzleyici</string>
     <key>CFBundlePackageType</key><string>APPL</string>
-    <key>CFBundleShortVersionString</key><string>1.0</string>
+    <key>CFBundleShortVersionString</key><string>$VERSION</string>
     <key>CFBundleVersion</key><string>1</string>
     <key>CFBundleDevelopmentRegion</key><string>tr</string>
     <key>LSMinimumSystemVersion</key><string>14.0</string>

@@ -7,6 +7,17 @@ Mac'i o anda neyin yorduğunu gösteren küçük bir menü çubuğu uygulaması 
 - Kendi süreçleriniz için: önceliği düşür (nice +10) ve onaylı sonlandır (SIGTERM). Sistem süreçlerinde, WindowServer ve loginwindow'da düğmeler kapalıdır.
 - Her 2 saniyede yenilenir. Pencere kapalıyken süreç listesi hiç ölçülmez.
 
+## İndir
+
+[Son sürümü indirin](https://github.com/ibrhmethmx7/islemci-izleyici/releases/latest) (`IslemciIzleyici-<sürüm>.zip`). macOS 14 ve üstü; Apple Silicon ve Intel.
+
+1. Zip'i açın, `IslemciIzleyici.app`'i **Uygulamalar** klasörüne sürükleyin.
+2. Uygulama Apple onaylı bir geliştirici imzası taşımadığı için ilk açılışta macOS uyarı verir:
+   - **macOS 15 ve sonrası:** uyarıyı kapatın, **Sistem Ayarları > Gizlilik ve Güvenlik**'e gidin, aşağıdaki "IslemciIzleyici" satırında **Yine de Aç**'a basın.
+   - **macOS 14:** Finder'da uygulamaya sağ tıklayıp **Aç**'ı seçin.
+   - Ya da Terminal'de: `xattr -dr com.apple.quarantine /Applications/IslemciIzleyici.app`
+3. Menü çubuğunda "CPU %…" belirir. Dock'ta simgesi yoktur.
+
 ## Derleme
 
 Xcode projesi gerekmez, yalnızca Xcode'un komut satırı araçları (Swift 5.9+) yeter. macOS 14 ve üstü.
@@ -34,6 +45,12 @@ Komut satırından da açılıp kapatılabilir:
 ```
 
 Sistem Ayarları > Genel > Giriş Öğeleri'nde de görünür, oradan da kapatılabilir.
+
+Dağıtım için universal (Apple Silicon + Intel) zip:
+
+```bash
+./release.sh 1.0                  # dist/IslemciIzleyici-1.0.zip
+```
 
 Ölçümleri terminalde görmek için (top / vm_stat / df ile karşılaştırmaya yarar):
 
