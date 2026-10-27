@@ -35,3 +35,13 @@ PLIST
 
 codesign --force --sign - "$APP"
 echo "Hazır: $PWD/$APP"
+
+# --install: ~/Applications'a kopyalar. Açılışta başlatma için kalıcı bir yer gerekir;
+# build/ her derlemede silinir.
+if [[ "${1:-}" == "--install" ]]; then
+    DEST="$HOME/Applications/$NAME.app"
+    mkdir -p "$HOME/Applications"
+    rm -rf "$DEST"
+    ditto "$APP" "$DEST"
+    echo "Kuruldu: $DEST"
+fi

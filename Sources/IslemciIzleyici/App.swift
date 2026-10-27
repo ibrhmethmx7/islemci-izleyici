@@ -6,6 +6,7 @@ struct IslemciIzleyiciApp: App {
 
     init() {
         Dump.runIfRequested()
+        LoginItem.runIfRequested()
     }
 
     var body: some Scene {

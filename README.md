@@ -16,7 +16,24 @@ Xcode projesi gerekmez, yalnızca Xcode'un komut satırı araçları (Swift 5.9+
 open build/IslemciIzleyici.app
 ```
 
-Çıkmak için pencerenin altındaki **Çık** düğmesi. Açılışta otomatik başlamaz.
+Çıkmak için pencerenin altındaki **Çık** düğmesi.
+
+### Açılışta başlatma
+
+Uygulamayı kalıcı bir yere kurup pencerenin altındaki **Açılışta başlat** kutusunu işaretleyin:
+
+```bash
+./build-app.sh --install          # ~/Applications/IslemciIzleyici.app
+open ~/Applications/IslemciIzleyici.app
+```
+
+Komut satırından da açılıp kapatılabilir:
+
+```bash
+~/Applications/IslemciIzleyici.app/Contents/MacOS/IslemciIzleyici --login-item on   # off | status
+```
+
+Sistem Ayarları > Genel > Giriş Öğeleri'nde de görünür, oradan da kapatılabilir.
 
 Ölçümleri terminalde görmek için (top / vm_stat / df ile karşılaştırmaya yarar):
 

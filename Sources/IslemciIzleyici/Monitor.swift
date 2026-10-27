@@ -5,6 +5,7 @@ import Foundation
 final class Monitor: ObservableObject {
     @Published private(set) var snap = Snapshot()
     @Published var message: String?
+    @Published private(set) var launchAtLogin = LoginItem.isEnabled
 
     nonisolated static let interval: TimeInterval = 2
     // Kapatılırsa oturum düşer ya da sistem bozulur; düğmeler bunlarda hiç açılmaz.
@@ -51,6 +52,16 @@ final class Monitor: ObservableObject {
             title += " · Disk " + Fmt.disk(v.availableImportant)
         }
         return title
+    }
+
+    func setLaunchAtLogin(_ on: Bool) {
+        do {
+            try LoginItem.set(on)
+        } catch {
+            show("Açılışta başlat değiştirilemedi: \(error.localizedDescription)")
+        }
+        launchAtLogin = LoginItem.isEnabled
+        if on && !launchAtLogin { show("Açılışta başlat: \(LoginItem.statusText)") }
     }
 
     // MARK: Süreç işlemleri

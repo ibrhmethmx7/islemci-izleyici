@@ -23,18 +23,25 @@ struct ContentView: View {
     }
 
     private func footer(_ s: Snapshot) -> some View {
-        HStack {
+        VStack(alignment: .leading, spacing: 8) {
             if let m = monitor.message {
                 Text(m).foregroundStyle(.blue)
             } else {
                 Text("Son ölçüm \(s.date.formatted(date: .omitted, time: .standard)) · \(s.processCount) süreç")
                     .foregroundStyle(.secondary)
             }
-            Spacer()
-            Button("Etkinlik Monitörü") {
-                NSWorkspace.shared.open(URL(fileURLWithPath: "/System/Applications/Utilities/Activity Monitor.app"))
+            HStack {
+                Toggle("Açılışta başlat", isOn: Binding(
+                    get: { monitor.launchAtLogin },
+                    set: { monitor.setLaunchAtLogin($0) }
+                ))
+                .toggleStyle(.checkbox)
+                Spacer()
+                Button("Etkinlik Monitörü") {
+                    NSWorkspace.shared.open(URL(fileURLWithPath: "/System/Applications/Utilities/Activity Monitor.app"))
+                }
+                Button("Çık") { NSApp.terminate(nil) }
             }
-            Button("Çık") { NSApp.terminate(nil) }
         }
         .font(.caption)
         .lineLimit(1)
