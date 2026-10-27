@@ -52,3 +52,7 @@ build/IslemciIzleyici.app/Contents/MacOS/IslemciIzleyici --dump 3
 | Bellek baskısı | `kern.memorystatus_vm_pressure_level` (macOS'un kendi değeri) |
 | Swap | `vm.swapusage`; diske yazma/okuma hızı `vm_statistics64` farkından |
 | Disk | `volumeAvailableCapacityForImportantUsage` (Finder'ın "kullanılabilir"i) ve `volumeAvailableCapacity` (df'teki boş alan) |
+
+## Lisans
+
+MIT. Ayrıntılar için [LICENSE](LICENSE) dosyasına bakın.
